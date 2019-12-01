@@ -1,5 +1,5 @@
 import React from 'react';
-import Portfolio from './pages/portfolio'
+import Portfolio from './pages/Portfolio'
 import { Route } from 'react-router';
 
 
