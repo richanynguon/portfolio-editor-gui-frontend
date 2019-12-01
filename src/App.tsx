@@ -1,10 +1,12 @@
 import React from 'react';
+import Portfolio from './pages/portfolio'
+import { Route } from 'react-router';
 
 
 const App: React.FC = () => {
   return (
     <div >
-      <p>Test</p>
+      <Route exact path='/' component={Portfolio} />
     </div>
   );
 }

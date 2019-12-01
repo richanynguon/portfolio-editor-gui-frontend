@@ -1,13 +1,13 @@
 import React from 'react'
 
-const portfolio: React.FC = () => {
+const Portfolio: React.FC = () => {
   return (
     <div>
-      Test
+      Test from Portfolio
     </div>
   )
 }
 
-export default portfolio
+export default Portfolio;
 
 
