@@ -88,3 +88,9 @@ subscription - is a query that will trigger on rerender
 https://www.freecodecamp.org/news/five-common-problems-in-graphql-apps-and-how-to-fix-them-ac74d37a293c/
 
 https://github.com/scroll-out/scroll-out
+
+https://www.youtube.com/watch?v=pbGz1njqhxU&feature=youtu.be
+
+https://www.youtube.com/watch?v=Gwkly9lYjKQ
+
+https://www.youtube.com/watch?v=7jYRAcZxUM8 **

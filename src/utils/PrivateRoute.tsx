@@ -1,19 +1,20 @@
-import React, { Component } from "react";
+import React, {  ReactType } from "react";
 import { Route, Redirect } from "react-router-dom";
 
 interface PrivateRouteProps  {
-  component: Component,
+  Component:  ReactType,
+  path: string,
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({ component, ...rest }) => {
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ Component, path }) => {
   return (
     <Route
-      {...rest}
+      path={path}
       render={props =>
         localStorage.getItem("token") ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/landing" />
+          <Redirect to="/" />
         )
       }
     />
