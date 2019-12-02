@@ -19,7 +19,9 @@ export default function NavBar() {
       <NavLink to='/projects'>Projects</NavLink>
       <NavLink to='/welcome'>&#x2B21;</NavLink>
       <NavLink to='/contact'>Contact</NavLink>
-      <NavLink to='/login'>Admin</NavLink>
+      {isAuth
+        ? <NavLink to='/login'>Admin</NavLink>
+        : setIsAuth(false)}
 
     </header>
   )

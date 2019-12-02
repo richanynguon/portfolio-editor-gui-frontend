@@ -9,7 +9,6 @@ import NavBar from './components/navbar/NavBar';
 const App: React.FC = () => {
   return (
     <div >
-      <NavBar/>
       <Route path='/' component={Portfolio} />
       <PrivateRoute path='/admin' Component={Admin} />
     </div>
