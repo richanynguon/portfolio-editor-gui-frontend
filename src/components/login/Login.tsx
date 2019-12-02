@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 
 
 export default function Login() {
-  const [form, setForm] = useState({
-    email: '',
-    password: '',
-   })
+
 
   return (
     <div>

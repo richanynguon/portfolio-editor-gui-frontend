@@ -1,17 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 export default function NavBar() {
-  const [isAuth, setIsAuth] = useState(false)
 
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (!token) {
-      setIsAuth(false)
-    } else {
-      setIsAuth(true)
-    }
-  }, [])
 
   return (
     <header>
@@ -19,10 +10,7 @@ export default function NavBar() {
       <NavLink to='/projects'>Projects</NavLink>
       <NavLink to='/welcome'>&#x2B21;</NavLink>
       <NavLink to='/contact'>Contact</NavLink>
-      {isAuth
-        ? <NavLink to='/login'>Admin</NavLink>
-        : setIsAuth(false)}
-
+      <NavLink to='/sudo'>Sudo</NavLink>
     </header>
   )
 }

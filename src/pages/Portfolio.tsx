@@ -4,8 +4,8 @@ import Welcome from '../components/welcome/Welcome'
 import Bio from '../components/bio/Bio'
 import Contact from '../components/contact/Contact'
 import Projects from '../components/projects/Projects'
-import Login from '../components/login/Login'
 import NavBar from '../components/navbar/NavBar'
+import AdminTab from '../components/admintab/AdminTab'
 
 const Portfolio: React.FC = () => {
   return (
@@ -19,7 +19,7 @@ const Portfolio: React.FC = () => {
           <Route path='/bio' component={Bio} />
           <Route path='/contact' component={Contact} />
           <Route path='/projects' component={Projects} />
-          <Route path='/login' component={Login} />
+          <Route path='/sudo' component={AdminTab} />
         </Switch>
       </div>
     </div>

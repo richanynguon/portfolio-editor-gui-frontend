@@ -1,36 +1,69 @@
-import React, { useState } from 'react'
-import { formChange, formSubmit } from '../../utils/formHelper'
+import React from 'react';
+import * as Yup from 'yup';
+import { withFormik, FormikProps, ErrorMessage, Form, Field } from 'formik';
+import * as styled from 'styled-components'
 
-
-const Register: React.FC = () => {
-
-  const [registerForm, setregisterForm] = useState({
-    email: '',
-    user_name: '',
-    password: '',
-  })
-
-  const onChange = (e:React.ChangeEvent, setState:) => {
-    setregisterForm({
-      [e.target.name]: e.target.value,
-      ...registerForm
-    })
-  }
-
-  return (
-    <div>
-      <form>
-        <input
-          type='text'
-          placeholder='Username'
-          required
-          name=
-          onChange={onChange}
-        />
-
-      </form>
-    </div>
-  )
+interface FormValues {
+  user_name: string;
+  email: string;
+  password: string;
 }
+
+const InnerForm = (props:  FormikProps<FormValues>) => {
+  const { isSubmitting} = props;
+  return (
+    <Form>
+      Username:
+      <Field type="name" name="user_name" />
+      <ErrorMessage name='name' />
+      Email:
+      <Field type="email" name="email" />
+      <ErrorMessage name='email' />
+      Password:
+      <Field type="password" name="password" />
+      <ErrorMessage name='password' />
+
+      <button type="submit" disabled={isSubmitting}>
+        Submit
+      </button>
+    </Form>
+  );
+};
+
+
+
+const RegisterForm = withFormik<{}, FormValues>({
+
+  mapPropsToValues: () => {
+    return {
+      user_name: '',
+      email: '',
+      password: '',
+    };
+  },
+
+  validationSchema: Yup.object().shape({
+    user_name: Yup.string()
+    .min(5, "Username must be 5 characters or longer")
+    .required("Username is required"),
+		email: Yup.string()
+			.email("Email not valid")
+			.required("Email is required"),
+		password: Yup.string()
+			.min(8, "Password must be 8 characters or longer")
+			.required("Password is required"),
+	}),
+
+  handleSubmit: (values, { setStatus, resetForm, setErrors, setSubmitting }) => {
+  
+  },
+})(InnerForm);
+
+
+const Register = () => (
+  <div>
+    <RegisterForm />
+  </div>
+);
 
 export default Register;
