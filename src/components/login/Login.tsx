@@ -1,66 +1,66 @@
-import React from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import * as Yup from 'yup';
-import { withFormik, FormikProps, ErrorMessage, Form, Field } from 'formik';
+import { ErrorMessage, Form, Field, Formik } from 'formik';
 import * as s from '../../styles/styles'
 import { useMutation } from '@apollo/react-hooks'
+import { LOGIN } from '../../modules/users/users.queries'
+import { UserContext } from '../../modules/users/users.context';
 
 
-interface FormValues {
-  user_name: string;
-  password: string;
-}
 
-const InnerForm = (props: FormikProps<FormValues>) => {
-  const { isSubmitting } = props;
+const Login = () => {
+  const [login, { data }] = useMutation(LOGIN)
+  const { setState } = useContext(UserContext)
+  const [message, setMessage] = useState("")
+
+  useEffect(() => {
+    if (data) {
+      if (data.login[0]) {
+        setMessage(data.login[0].message)
+      }
+    }
+
+  }, [data, setState])
+
   return (
-    <Form>
-      <s.Label>
-        Username:
-      <Field type="name" name="user_name" />
-        <ErrorMessage name='name' />
-      </s.Label>
-      <s.Label>
-        Password:
-      <Field type="password" name="password" />
-        <ErrorMessage name='password' />
-      </s.Label>
+    <Formik
+      initialValues={{ email: '', password: '' }}
+      validationSchema={Yup.object({
+        password: Yup.string()
+          .max(20, 'Must be 20 characters or less')
+          .required('Required'),
+        email: Yup.string()
+          .email('Invalid email address')
+          .required('Required'),
+      })}
+      onSubmit={(values) => {
+        login({ variables: values })
 
-      <button type="submit" disabled={isSubmitting}>
-        Submit
-      </button>
-    </Form>
+
+      }}
+    >
+      <Form>
+       
+        <s.Label>
+          Email:
+       <Field type="email" name="email" />
+          <ErrorMessage name='email' />
+        </s.Label>
+        <s.Label>
+          Password:
+       <Field type="password" name="password" />
+          <ErrorMessage name='password' />
+        </s.Label>
+        <button type="submit">
+          Submit
+       </button>
+       {message}
+      </Form>
+      
+    </Formik>
   );
-};
-
-const LoginForm = withFormik<{}, FormValues>({
-
-  mapPropsToValues: () => {
-    return {
-      user_name: '',
-      password: '',
-    };
-  },
-
-  validationSchema: Yup.object().shape({
-    user_name: Yup.string()
-      .min(5, "Username must be 5 characters or longer")
-      .required("Username is required"),
-    password: Yup.string()
-      .min(8, "Password must be 8 characters or longer")
-      .required("Password is required"),
-  }),
-
-  handleSubmit: (values, { setStatus, resetForm, setErrors, setSubmitting }) => {
-
-  },
-})(InnerForm);
-
-
-const Login = () => (
-  <div>
-    Login
-    <LoginForm />
-  </div>
-);
-
+}
 export default Login;
+
+
+
