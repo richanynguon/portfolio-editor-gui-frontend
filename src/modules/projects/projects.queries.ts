@@ -1,5 +1,6 @@
 import { gql } from "apollo-boost";
 
+
 export const CREATE_PROJECT = gql`
 mutation Project(  
   $project_focus: String
