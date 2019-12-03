@@ -4,7 +4,7 @@ import { createHttpLink } from "apollo-link-http";
 
 
 const httpLink = createHttpLink({
-	uri: "https://portfolio-nest.herokuapp.com/"
+	uri: "https://portfolio-nest.herokuapp.com/graphql"
 });
 
  const client = new ApolloClient({

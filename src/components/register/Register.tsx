@@ -1,76 +1,58 @@
 import React from 'react';
 import * as Yup from 'yup';
-import { withFormik, FormikProps, ErrorMessage, Form, Field } from 'formik';
+import { ErrorMessage, Form, Field, Formik } from 'formik';
 import * as s from '../../styles/styles'
+import { useMutation } from '@apollo/react-hooks'
+import { SIGNUP } from '../../modules/users/users.queries'
 
 
-interface FormValues {
-  user_name: string;
-  email: string;
-  password: string;
-}
-
-const InnerForm = (props: FormikProps<FormValues>) => {
-  const { isSubmitting } = props;
+const Register = () => {
+  const [signup] = useMutation(SIGNUP)
   return (
-    <Form>
-      <s.Label>
-        Username:
-      <Field type="name" name="user_name" />
-        <ErrorMessage name='name' />
-      </s.Label>
-      <s.Label>
-        Email:
-      <Field type="email" name="email" />
-        <ErrorMessage name='email' />
-      </s.Label>
-      <s.Label>
-        Password:
-      <Field type="password" name="password" />
-        <ErrorMessage name='password' />
-      </s.Label>
-      <button type="submit" disabled={isSubmitting}>
-        Submit
-      </button>
-    </Form>
+    <Formik
+      initialValues={{ user_name: '', email: '', password: '' }}
+      validationSchema={Yup.object({
+        user_name: Yup.string()
+          .max(15, 'Must be 15 characters or less')
+          .required('Required'),
+        password: Yup.string()
+          .max(20, 'Must be 20 characters or less')
+          .required('Required'),
+        email: Yup.string()
+          .email('Invalid email address')
+          .required('Required'),
+      })}
+      onSubmit={(values, { setSubmitting, resetForm }) => {
+        signup({ variables: values })
+        setSubmitting(false);
+        resetForm();
+
+      }}
+    >
+      <Form>
+        <s.Label>
+          Username:
+       <Field type="name" name="user_name" />
+          <ErrorMessage name='name' />
+        </s.Label>
+        <s.Label>
+          Email:
+       <Field type="email" name="email" />
+          <ErrorMessage name='email' />
+        </s.Label>
+        <s.Label>
+          Password:
+       <Field type="password" name="password" />
+          <ErrorMessage name='password' />
+        </s.Label>
+        <button type="submit">
+          Submit
+       </button>
+      </Form>
+    </Formik>
   );
-};
-
-
-
-const RegisterForm = withFormik<{}, FormValues>({
-
-  mapPropsToValues: () => {
-    return {
-      user_name: '',
-      email: '',
-      password: '',
-    };
-  },
-
-  validationSchema: Yup.object().shape({
-    user_name: Yup.string()
-      .min(5, "Username must be 5 characters or longer")
-      .required("Username is required"),
-    email: Yup.string()
-      .email("Email not valid")
-      .required("Email is required"),
-    password: Yup.string()
-      .min(8, "Password must be 8 characters or longer")
-      .required("Password is required"),
-  }),
-
-  handleSubmit: (values, { setStatus, resetForm, setErrors, setSubmitting }) => {
-
-  },
-})(InnerForm);
-
-
-const Register = () => (
-  <div>
-    Register
-    <RegisterForm />
-  </div>
-);
-
+}
 export default Register;
+
+
+
