@@ -20,14 +20,14 @@ const Register = () => {
     <Formik
       initialValues={{ user_name: '', email: '', password: '' }}
       validationSchema={Yup.object({
-        user_name: Yup.string
-          ()
-          .max(15, 'Must be 15 characters or less')
+        user_name: Yup.string()
+          .min(1, 'Must be 1 characters or more')
           .required('Required'),
         password: Yup.string()
-          .max(20, 'Must be 20 characters or less')
+          .min(8, 'Must be 8 characters or more')
           .required('Required'),
         email: Yup.string()
+          .lowercase()
           .email('Invalid email address')
           .required('Required'),
       })}
@@ -41,17 +41,17 @@ const Register = () => {
       <Form>
         <s.Label>
           Username:
-       <Field type="name" name="user_name" />
-          <ErrorMessage name='name' />
+       <Field name="user_name" placeholder='username'/>
+          <ErrorMessage name='user_name' />
         </s.Label>
         <s.Label>
           Email:
-       <Field type="email" name="email" />
+       <Field name="email" placeholder='email'/>
           <ErrorMessage name='email' />
         </s.Label>
         <s.Label>
           Password:
-       <Field type="password" name="password" />
+       <Field name="password" placeholder='password'/>
           <ErrorMessage name='password' />
         </s.Label>
         <button type="submit">

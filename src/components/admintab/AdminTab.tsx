@@ -8,6 +8,7 @@ export default function AdminTab() {
     <div>
       <Register />
       <Login/>
+      <a href="http://localhost:3000/admin">&#x2B21;</a>
     </div>
   )
 }

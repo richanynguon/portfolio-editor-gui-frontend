@@ -33,9 +33,10 @@ const Login = () => {
       initialValues={{ email: '', password: '' }}
       validationSchema={Yup.object({
         password: Yup.string()
-          .max(20, 'Must be 20 characters or less')
+          .min(8, 'Must be 8 characters or more')
           .required('Required'),
         email: Yup.string()
+          .lowercase()
           .email('Invalid email address')
           .required('Required'),
       })}
@@ -43,19 +44,19 @@ const Login = () => {
         login({ variables: values })
         setSubmitting(false);
         resetForm();
-        
+
       }}
     >
       <Form>
 
         <s.Label>
           Email:
-       <Field type="email" name="email" />
+       <Field placeholder="email" name="email" />
           <ErrorMessage name='email' />
         </s.Label>
         <s.Label>
           Password:
-       <Field type="password" name="password" />
+       <Field placeholder="password" name="password" />
           <ErrorMessage name='password' />
         </s.Label>
         <button type="submit">
