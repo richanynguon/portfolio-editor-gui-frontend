@@ -4,8 +4,8 @@ import { useQuery } from '@apollo/react-hooks'
 
 export default function Projects() {
   const [projects, setProjects] = useState()
-  const { data, loading } = useQuery(GET_ALL_PROJECTS)
-  
+  const { data } = useQuery(GET_ALL_PROJECTS)
+
   type ProjectVote = {
     option: String;
     votes: Number
@@ -25,16 +25,17 @@ export default function Projects() {
     if (data) {
       setProjects(data.getAllProjects)
     }
-  }, [])
+  }, [data])
 
   return (
     <div>
       {
-        projects
+        projects === undefined
           ? 'User does not have projects yet'
-          : projects.map((project: ProjectValue) => `${project.project_stack}`)
+          : projects.length === 0
+            ? "User does not have projects yet"
+            : projects.map((project: ProjectValue) => `${project.project_stack}`)
       }
-      project
     </div>
   )
 }

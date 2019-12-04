@@ -12,13 +12,13 @@ import { GET_ALL_PROJECTS } from '../modules/projects/projects.queries'
 
 const Portfolio: React.FC = () => {
   const [profile, setProfile] = useState()
-  const { data, loading } = useQuery(GET_ALL_PROJECTS)
+  const { data } = useQuery(GET_ALL_PROJECTS)
 
   useEffect(() => {
     if (data){
-      setProfile(data.getAllProfiles[0])
+      setProfile(data.getAllProfiles)
     }
-  }, [])
+  }, [data])
 
   return (
     <div>

@@ -40,7 +40,7 @@ getAllProfiles
 */
 
 export const GET_ALL_PROFILES = gql`
-query{
+query {
   getAllProfiles{
     id
     bio

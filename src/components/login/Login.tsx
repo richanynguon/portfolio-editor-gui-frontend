@@ -26,7 +26,7 @@ const Login = () => {
       }
     }
 
-  }, [data, setState])
+  }, [data, setState, history])
 
   return (
     <Formik
