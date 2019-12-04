@@ -1,4 +1,4 @@
-import React, {  Dispatch } from 'react'
+import React from 'react'
 
 type MyState = {
   bio: string;
@@ -14,7 +14,6 @@ type MyState = {
 
 type ContextValue = {
   profile: MyState;
-  setProfile: Dispatch<any>;
 };
 
 
@@ -29,18 +28,7 @@ const initialState: ContextValue = {
     learning: "",
     interested: "",
     involved: "",
-   },
-  setProfile: (profile: { 
-    bio: string
-    location: string
-    github: string
-    twitter: string
-    linkedin: string
-    stack: string
-    learning: string
-    interested: string
-    involved: string
-   }) => {}
+   }
 };
 
-export const UserContext = React.createContext(initialState) 
+export const ProfileContext = React.createContext(initialState) 
