@@ -40,9 +40,8 @@ query Project($id: Float!){
 `;
 
 export const GET_ALL_PROJECTS = gql`
-query Project($skip: Float!, $take: Float!){
-  getAllProjects(skip: $skip, take: $take){
-   userId
+query {
+  getAllProjects(skip: 0, take: 20){
     id
     title
     project_github
@@ -50,12 +49,10 @@ query Project($skip: Float!, $take: Float!){
   projectVote{
     id
     option
-    projectId
   }
     project_stack
     project_photo
-    project_github
-    
+   
   }
 }
 `;

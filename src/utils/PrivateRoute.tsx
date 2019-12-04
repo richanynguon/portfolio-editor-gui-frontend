@@ -11,7 +11,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ Component, path }) => {
     <Route
       path={path}
       render={props =>
-        localStorage.getItem("token") ? (
+        localStorage.getItem("a") ? (
           <Component {...props} />
         ) : (
           <Redirect to="/" />

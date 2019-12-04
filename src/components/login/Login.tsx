@@ -5,6 +5,7 @@ import * as s from '../../styles/styles'
 import { useMutation } from '@apollo/react-hooks'
 import { LOGIN } from '../../modules/users/users.queries'
 import { UserContext } from '../../modules/users/users.context';
+import { useHistory } from 'react-router';
 
 
 
@@ -12,51 +13,58 @@ const Login = () => {
   const [login, { data }] = useMutation(LOGIN)
   const { setState } = useContext(UserContext)
   const [message, setMessage] = useState("")
+  const history = useHistory();
 
   useEffect(() => {
     if (data) {
-      if (data.login[0]) {
+      if (data.login[0].message === "creator") {
+        setState(data.login[0].message)
+        localStorage.setItem('a', data.login[0].path)
+        history.push('/admin')
+      } else {
         setMessage(data.login[0].message)
       }
     }
 
-  }, [data, setState])
+  }, [data, setState, history])
 
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
       validationSchema={Yup.object({
         password: Yup.string()
-          .max(20, 'Must be 20 characters or less')
+          .min(8, 'Must be 8 characters or more')
           .required('Required'),
         email: Yup.string()
+          .lowercase()
           .email('Invalid email address')
           .required('Required'),
       })}
-      onSubmit={(values) => {
+      onSubmit={(values, { setSubmitting, resetForm }) => {
         login({ variables: values })
-
+        setSubmitting(false);
+        resetForm();
 
       }}
     >
       <Form>
-       
+
         <s.Label>
           Email:
-       <Field type="email" name="email" />
+       <Field placeholder="email" name="email" />
           <ErrorMessage name='email' />
         </s.Label>
         <s.Label>
           Password:
-       <Field type="password" name="password" />
+       <Field placeholder="password" name="password" />
           <ErrorMessage name='password' />
         </s.Label>
         <button type="submit">
           Submit
        </button>
-       {message}
+        {message}
       </Form>
-      
+
     </Formik>
   );
 }
