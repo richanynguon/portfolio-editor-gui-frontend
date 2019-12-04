@@ -1,31 +1,43 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Yup from 'yup';
 import { ErrorMessage, Form, Field, Formik } from 'formik';
-import * as s from '../../styles/styles'
-import { useMutation } from '@apollo/react-hooks'
-import { CREATE_PROJECT } from '../../modules/projects/projects.queries';
-import { UserContext } from '../../modules/users/users.context';
+import * as s from '../styles/styles'
+import { useMutation, useQuery } from '@apollo/react-hooks'
+import { EDIT_PROJECT } from '../modules/projects/projects.queries';
+import { GET_PROFILE } from '../modules/profile/profile.queries';
 
 
-const ProjectForm = () => {
-  const [createProject, { data }] = useMutation(CREATE_PROJECT)
-  const [message, setMessage] = useState("")
-
+const ProjectForm = (props: any) => {
+  const { data } = useQuery(GET_PROFILE, 
+    {
+      variables: {
+        id: props.match.params.id,
+      }
+    })
+  const [editProject] = useMutation(EDIT_PROJECT)
+  const [project, setProject] = useState({
+    id: props.match.params.id,
+    title: '',
+    project_focus: '',
+    project_github: '',
+    project_photo: '',
+    project_stack: '',
+  })
 
   useEffect(() => {
     if (data) {
-      setMessage(data.signup[0].message)
+      setProject(data.signup[0].message)
     }
   }, [data])
 
   return (
     <Formik
       initialValues={{
-        title: '',
-        project_focus: '',
-        project_github: '',
-        project_photo: '',
-        project_stack: '',
+        title: project.title,
+        project_focus: project.project_focus,
+        project_github: project.project_github,
+        project_photo: project.project_photo,
+        project_stack: project.project_stack,
 
       }}
       validationSchema={Yup.object({
@@ -43,7 +55,7 @@ const ProjectForm = () => {
           .required('Required'),
       })}
       onSubmit={(values, { setSubmitting, resetForm }) => {
-        createProject({ variables: values })
+        editProject({ variables: values })
         setSubmitting(false);
         resetForm();
 
@@ -78,7 +90,7 @@ const ProjectForm = () => {
         <button type="submit">
           Submit
        </button>
-        {message}
+
       </Form>
 
     </Formik>
