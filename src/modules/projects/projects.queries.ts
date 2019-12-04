@@ -29,7 +29,6 @@ query Project($id: Float!){
     project_focus
     project_stack
     project_photo
-    project_github
     projectVote{
       id
       option
@@ -49,6 +48,7 @@ query {
   projectVote{
     id
     option
+    votes
   }
     project_stack
     project_photo

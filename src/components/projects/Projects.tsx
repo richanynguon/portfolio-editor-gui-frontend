@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { GET_ALL_PROJECTS } from '../../modules/projects/projects.queries'
-import { useQuery } from '@apollo/react-hooks'
+import React, { useContext } from 'react'
+import { ProjectContext } from '../../modules/projects/project.context'
+
 
 export default function Projects() {
-  const [projects, setProjects] = useState()
-  const { data } = useQuery(GET_ALL_PROJECTS)
+  const { projects } = useContext(ProjectContext)
 
   type ProjectVote = {
     option: String;
@@ -18,23 +17,15 @@ export default function Projects() {
     project_github: String;
     id: Number;
     project_photo: String;
-    projectVote: [ProjectVote]
+    projectVote: ProjectVote
   }
-
-  useEffect(() => {
-    if (data) {
-      setProjects(data.getAllProjects)
-    }
-  }, [data])
 
   return (
     <div>
       {
         projects === undefined
           ? 'User does not have projects yet'
-          : projects.length === 0
-            ? "User does not have projects yet"
-            : projects.map((project: ProjectValue) => `${project.project_stack}`)
+          : projects.map(project => `${project.id}`)
       }
     </div>
   )
