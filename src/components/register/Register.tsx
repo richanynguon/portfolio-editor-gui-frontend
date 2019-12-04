@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Yup from 'yup';
 import { ErrorMessage, Form, Field, Formik } from 'formik';
 import * as s from '../../styles/styles'
@@ -7,13 +7,21 @@ import { SIGNUP } from '../../modules/users/users.queries'
 
 
 const Register = () => {
-  const [signup] = useMutation(SIGNUP)
+  const [signup, { data }] = useMutation(SIGNUP)
+  const [message, setMessage] = useState("")
+
+  useEffect(() => {
+    if (data) {
+      setMessage(data.signup[0].message)
+    }
+  }, [data])
+
   return (
     <Formik
       initialValues={{ user_name: '', email: '', password: '' }}
       validationSchema={Yup.object({
         user_name: Yup.string
-        ()
+          ()
           .max(15, 'Must be 15 characters or less')
           .required('Required'),
         password: Yup.string()
@@ -49,7 +57,9 @@ const Register = () => {
         <button type="submit">
           Submit
        </button>
+        {message}
       </Form>
+
     </Formik>
   );
 }

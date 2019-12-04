@@ -15,7 +15,10 @@ const Login = () => {
 
   useEffect(() => {
     if (data) {
-      if (data.login[0]) {
+      if (data.login[0].message === "creator") {
+        setState(data.login[0].message)
+        localStorage.setItem('a', data.login[0].path)
+      } else {
         setMessage(data.login[0].message)
       }
     }
@@ -33,14 +36,15 @@ const Login = () => {
           .email('Invalid email address')
           .required('Required'),
       })}
-      onSubmit={(values) => {
+      onSubmit={(values, { setSubmitting, resetForm }) => {
         login({ variables: values })
-
-
+        setSubmitting(false);
+        resetForm();
+        
       }}
     >
       <Form>
-       
+
         <s.Label>
           Email:
        <Field type="email" name="email" />
@@ -54,9 +58,9 @@ const Login = () => {
         <button type="submit">
           Submit
        </button>
-       {message}
+        {message}
       </Form>
-      
+
     </Formik>
   );
 }

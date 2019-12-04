@@ -15,6 +15,7 @@ const Portfolio: React.FC = () => {
       <div className='parallax'></div>
       <div>
         <Switch>
+          
           <Route path='/welcome' component={Welcome} />
           <Route path='/bio' component={Bio} />
           <Route path='/contact' component={Contact} />
