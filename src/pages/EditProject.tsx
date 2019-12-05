@@ -15,6 +15,7 @@ const ProjectForm = (props: any) => {
       }
     })
   const [editProject] = useMutation(EDIT_PROJECT)
+  const [message, setMessage] = useState("")
   const [project, setProject] = useState({
     id: props.match.params.id,
     title: '',
@@ -26,7 +27,7 @@ const ProjectForm = (props: any) => {
 
   useEffect(() => {
     if (data) {
-      setProject(data.signup[0].message)
+      setProject(data.editProject[0].message)
     }
   }, [data])
 
@@ -90,7 +91,7 @@ const ProjectForm = (props: any) => {
         <button type="submit">
           Submit
        </button>
-
+       {message}
       </Form>
 
     </Formik>

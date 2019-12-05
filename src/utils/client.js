@@ -2,7 +2,6 @@ import ApolloClient from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { createHttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
-import { shouldInclude } from "apollo-utilities";
 
 const link = onError(({ graphQLErrors, networkError }) => {
 	if (graphQLErrors)
@@ -17,7 +16,8 @@ const link = onError(({ graphQLErrors, networkError }) => {
 
 const httpLink = createHttpLink({
 	uri: "https://portfolio-nest.herokuapp.com/graphql",
-    credentials: 'include'
+	credentials: "include",
+	
 });
 
 const combinedLink = link.concat(httpLink);
