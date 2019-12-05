@@ -15,7 +15,10 @@ mutation Project(
   project_stack: $project_stack
   project_photo: $project_photo
   title: $title
-  )
+  ){
+    path
+    message
+  }
 }
 `;
 
@@ -84,7 +87,10 @@ export const UPVOTE_PROJECT = gql`
 mutation Project($id: Float!){
   upVoteProject(
     id:$id
-  )
+  ){
+    path
+    message
+  }
 }
 `;
 
@@ -92,6 +98,9 @@ export const DELETE_PROJECT = gql`
 mutation Project($id: Float!){
   deleteProject(
     id:$id
-  )
+  ){
+    path
+    message
+  }
 }
 `;
