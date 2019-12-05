@@ -12,7 +12,7 @@ const ProfileForm = () => {
 
   useEffect(() => {
     if (data) {
-      setMessage(data.signup[0].message)
+      setMessage(data.createProfile[0].message)
     }
   }, [data])
 

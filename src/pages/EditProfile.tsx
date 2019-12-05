@@ -14,6 +14,7 @@ const ProfileForm = (props: any) => {
     }
   })
   const [editProfile] = useMutation(EDIT_PROFILE)
+  const [message, setMessage] = useState("")
   const [profile, setProfile] = useState({
     id: props.match.params.id,
     bio: '',
@@ -28,7 +29,7 @@ const ProfileForm = (props: any) => {
 
   useEffect(() => {
     if (data) {
-      setProfile(data.editprofile[0])
+      setProfile(data.editProfile[0].message)
     }
   }, [data])
 
@@ -117,6 +118,7 @@ const ProfileForm = (props: any) => {
         <button type="submit">
           Submit
        </button>
+       {message}
       </Form>
 
     </Formik>

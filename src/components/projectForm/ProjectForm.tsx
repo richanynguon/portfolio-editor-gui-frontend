@@ -14,7 +14,7 @@ const ProjectForm = () => {
 
   useEffect(() => {
     if (data) {
-      setMessage(data.signup[0].message)
+      setMessage(data.createProject[0].message)
     }
   }, [data])
 
