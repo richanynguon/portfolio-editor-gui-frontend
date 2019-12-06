@@ -1,7 +1,15 @@
 import { gql } from "apollo-boost";
 
 export const CREATE_PROFILE = gql`
-mutation Profile($bio: String, $location: String, $github: String, $twitter: String, $linkedin: String, $stack: String, $learning: String, $involved: String){
+mutation Profile(
+  $bio: String!, 
+  $location: String, 
+  $github: String, 
+  $twitter: String, 
+  $linkedin: String, 
+  $stack: String, 
+  $learning: String, 
+  $involved: String){
   createProfile(
     bio: $bio
     location: $location
