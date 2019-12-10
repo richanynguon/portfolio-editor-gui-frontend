@@ -95,6 +95,8 @@ https://www.youtube.com/watch?v=Gwkly9lYjKQ
 
 https://www.youtube.com/watch?v=7jYRAcZxUM8 **
 
+https://youtu.be/RiUSzS1l_bY
+
 alan12341234
 water drop, droppet, slow motion, high speed, water, 300fps, HS300
 May 11, 2009
@@ -186,3 +188,9 @@ const Basic = () => (
 );
 
 export default Basic;
+
+https://www.reddit.com/r/webdev/comments/2krge1/codepens_killer_html5_video_scrolling_controls_w/
+
+https://tobiasahlin.com/blog/move-from-jquery-to-vanilla-javascript/
+
+https://github.com/designcourse/html5-video-scroll/blob/master/index.html
