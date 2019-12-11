@@ -33,7 +33,7 @@ const App: React.FC = () => {
     }
   }, [thisProfile, theseProjects, projects, profile])
 
-  const images: Object = importAll(require.context('./assets/chromapics', false, /\.(png|jpe?g|svg)$/));
+  const images = importAll(require.context('./assets/chromapics', false, /\.(png|jpe?g|svg)$/));
   const imagesName = Object.keys(images) as (keyof object)
   let i: number = image;
   const x: (keyof object) = imagesName[i]
@@ -44,10 +44,10 @@ const App: React.FC = () => {
     const fps: number = 30;
     const imagePos: number = Math.round(scrollPosition / fps);
 
-    if (imagePos < 336) {
+    if (imagePos < 60) {
       setImage(imagePos)
     } else {
-      setImage(336)
+      setImage(60)
     }
 
   });

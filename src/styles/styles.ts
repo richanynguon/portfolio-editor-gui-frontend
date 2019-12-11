@@ -16,7 +16,7 @@ export const App = styled.div`
 }
 
 .scroll{
-  height: 10000px;
+  height: 5000px;
 }
 
 `
