@@ -5,18 +5,30 @@ export const Label = styled.label`
 display: flex;
 `
 
+
+
 export const App = styled.div`
 
+.absolute{
+  position: absolute;
+  max-width:100%;
+    max-height:90vh;
+    visibility: visible;
+}
 
-#sticky{
+.sticky{
   position: sticky;
-  height: 100vh;
-  width:100vw;
-  top: 0;
+
+
+  display: flex;
+  justify-content: center;
+  top: 5%;
+
 }
 
 .scroll{
-  height: 5000px;
+  height: 1500px;
+ 
 }
 
 `
