@@ -14,12 +14,12 @@ import { GET_ALL_PROJECTS } from './modules/projects/projects.queries';
 import NavBar from './components/navbar/NavBar';
 import { importAll } from './utils/importAll';
 import * as s from './styles/styles'
+import Image from './components/image/Image';
 
 const App: React.FC = () => {
   const [state, setState] = useState()
   const [profile, setProfile] = useState()
   const [projects, setProjects] = useState()
-  const [image, setImage] = useState(0)
 
   const { data: thisProfile } = useQuery(GET_ALL_PROFILES)
   const { data: theseProjects } = useQuery(GET_ALL_PROJECTS)
@@ -34,31 +34,31 @@ const App: React.FC = () => {
   }, [thisProfile, theseProjects, projects, profile])
 
   const images = importAll(require.context('./assets/chromapics', false, /\.(png|jpe?g|svg)$/));
-  const imagesName = Object.keys(images) as (keyof object)
-  let i: number = image;
-  const x: (keyof object) = imagesName[i]
-  const imageDir = images[x];
+  const imagesName: (keyof object)[] = Object.keys(images).reverse() as (keyof object)
 
   window.addEventListener('scroll', function () {
     const scrollPosition: number = window.pageYOffset
     const fps: number = 30;
     const imagePos: number = Math.round(scrollPosition / fps);
-
-    if (imagePos < 60) {
-      setImage(imagePos)
-    } else {
-      setImage(60)
+    const imgElement = document.getElementById(`${30 - imagePos}`) as HTMLImageElement
+      if (imagePos < 30) {
+        if (imgElement) {
+          if (imgElement.style.visibility = 'visible') {
+            imgElement.setAttribute('style', 'visibility: hidden;');
+        }
+      }
     }
 
+
   });
-
-
 
   return (
     <s.App >
       <NavBar />
       <div className="scroll">
-        <img id='sticky' src={imageDir} alt='' />
+        <div className='sticky'>{imagesName.map((image: (keyof object), index: number) => {
+          return <Image index={(index.toString())} key={index} zValue={index} imageDir={images[image]} />
+        })}</div>
       </div>
       <ProjectContext.Provider value={{ projects, setProjects }}>
         <ProfileContext.Provider value={{ profile, setProfile }}>
