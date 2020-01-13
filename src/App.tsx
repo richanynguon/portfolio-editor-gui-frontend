@@ -44,9 +44,9 @@ const App: React.FC = () => {
     if (imagePos < 30) {
       if (imgElement) {
         if (imgElement.style.visibility === 'visible') {
-          imgElement.setAttribute('style', 'visibility: hidden;');
+          imgElement.classList.add('hidden');
         } else {
-          imgElement.setAttribute('style', 'visibility: visbile;');
+          imgElement.classList.add('visible');
         }
       }
     }
