@@ -46,7 +46,7 @@ const App: React.FC = () => {
         if (imgElement.style.visibility === 'visible') {
           imgElement.classList.add('hidden');
         } else {
-          imgElement.classList.add('visible');
+          imgElement.classList.remove('hidden');
         }
       }
     }
