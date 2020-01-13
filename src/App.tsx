@@ -41,18 +41,21 @@ const App: React.FC = () => {
     const fps: number = 30;
     const imagePos: number = Math.round(scrollPosition / fps);
     const imgElement = document.getElementById(`${30 - imagePos}`) as HTMLImageElement
-    if (imagePos < 30) {
+    let lastImagePos;
+    if (imagePos < 30 && lastImagePos === imagePos) {
       if (imgElement) {
         if (imgElement.classList.contains('hidden')) {
           imgElement.classList.remove('hidden');
+          lastImagePos = imagePos
         } else {
           imgElement.classList.add('hidden');
+          lastImagePos = imagePos
         }
       }
     }
-
-
   });
+
+
 
   return (
     <s.App >
