@@ -43,7 +43,7 @@ const App: React.FC = () => {
     const imgElement = document.getElementById(`${30 - imagePos}`) as HTMLImageElement
     if (imagePos < 30) {
       if (imgElement) {
-        if (imgElement.hidden === true) {
+        if (imgElement.style.visibility === null || imgElement.style.visibility === 'visible') {
           imgElement.classList.remove('hidden');
         } else {
           imgElement.classList.add('hidden');
