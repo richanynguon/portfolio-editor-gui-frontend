@@ -44,7 +44,7 @@ const App: React.FC = () => {
     let lastImagePos;
     if (imagePos < 30 && lastImagePos === imagePos) {
       if (imgElement) {
-        if (imgElement.classList.contains('hidden')) {
+        if (imgElement.classList.length === 2) {
           imgElement.classList.remove('hidden');
           lastImagePos = imagePos
         } else {
