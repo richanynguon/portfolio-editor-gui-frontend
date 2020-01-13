@@ -41,10 +41,12 @@ const App: React.FC = () => {
     const fps: number = 30;
     const imagePos: number = Math.round(scrollPosition / fps);
     const imgElement = document.getElementById(`${30 - imagePos}`) as HTMLImageElement
-      if (imagePos < 30) {
-        if (imgElement) {
-          if (imgElement.style.visibility = 'visible') {
-            imgElement.setAttribute('style', 'visibility: hidden;');
+    if (imagePos < 30) {
+      if (imgElement) {
+        if (imgElement.style.visibility === 'visible') {
+          imgElement.setAttribute('style', 'visibility: hidden;');
+        } else {
+          imgElement.setAttribute('style', 'visibility: visbile;');
         }
       }
     }
