@@ -38,7 +38,7 @@ const App: React.FC = () => {
 
   window.addEventListener('scroll', function () {
     const scrollPosition: number = window.pageYOffset
-    const fps: number = 30;
+    const fps: number = 20;
     const imagePos: number = Math.round(scrollPosition / fps);
     const imgElement = document.getElementById(`${30 - imagePos}`) as HTMLImageElement
     let lastImagePos;
