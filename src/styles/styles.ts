@@ -12,8 +12,7 @@ export const App = styled.div`
 .absolute{
   position: absolute;
   max-width:100%;
-    max-height:90vh;
-    visibility: visible;
+  max-height:90vh;
 }
 
 .sticky{
@@ -28,7 +27,6 @@ export const App = styled.div`
 
 .scroll{
   height: 1500px;
- 
 }
 
 `
